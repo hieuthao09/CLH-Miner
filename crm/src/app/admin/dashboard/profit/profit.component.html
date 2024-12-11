@@ -1,0 +1,117 @@
+<app-loading
+	[onTop]="true"
+	[show]="profitQuery.isFetching()"
+/>
+
+<div class="flex flex-col gap-5">
+	<app-banner-component [breadcrumbs]="breadcrumbs" />
+
+	<p-table
+		[value]="profitQuery.data()?.data || []"
+		dataKey="id"
+		[tableStyle]="{ 'min-width': '60rem' }"
+		class="profit-table"
+	>
+		<ng-template pTemplate="header">
+			<tr class="header">
+				<th class="p-2 bg-greenlighten-1 text-white w-20"></th>
+				<th
+					class="p-2 bg-greenlighten-1 text-white"
+					pSortableColumn="id"
+				>
+					<div class="flex items-center gap-3">
+						<p>Mã</p>
+
+						<p-sortIcon field="id" />
+					</div>
+				</th>
+				<th
+					class="p-2 bg-greenlighten-1 text-white"
+					pSortableColumn="profit"
+				>
+					<div class="flex items-center gap-3">
+						<p>Lợi nhuận</p>
+
+						<p-sortIcon field="profit" />
+					</div>
+				</th>
+			</tr>
+		</ng-template>
+
+		<ng-template
+			pTemplate="body"
+			let-product
+			let-expanded="expanded"
+		>
+			<tr>
+				<td class="">
+					<p-button
+						type="button"
+						pRipple
+						[pRowToggler]="product"
+						[text]="true"
+						[rounded]="true"
+						[plain]="true"
+						[icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+					/>
+				</td>
+				<td class="">{{ product.id }}</td>
+				<td class="text-left">{{ product.profit.toLocaleString('vi-VN') }}đ</td>
+			</tr>
+		</ng-template>
+
+		<ng-template
+			pTemplate="rowexpansion"
+			let-product
+		>
+			<tr class="header">
+				<td
+					colspan="7"
+					class="p-3 pb-0"
+				>
+					<p-table [value]="product.items">
+						<ng-template pTemplate="header">
+							<tr>
+								<th
+									pSortableColumn="internalCode"
+									class="p-2 bg-greenlighten-2 text-white"
+								>
+									<div class="flex items-center gap-3">
+										<p>Mã</p>
+
+										<p-sortIcon field="internalCode" />
+									</div>
+								</th>
+								<th
+									pSortableColumn="name"
+									class="p-2 bg-greenlighten-2 text-white"
+								>
+									<div class="flex items-center gap-3">
+										<p>Tên</p>
+
+										<p-sortIcon field="name" />
+									</div>
+								</th>
+							</tr>
+						</ng-template>
+						<ng-template
+							pTemplate="body"
+							let-order
+						>
+							<tr>
+								<td class="p-3">{{ order.internalCode }}</td>
+								<td class="p-3">{{ order.name }}</td>
+							</tr>
+						</ng-template>
+
+						<ng-template pTemplate="emptymessage">
+							<tr>
+								<td colspan="6">There are no order for this product yet.</td>
+							</tr>
+						</ng-template>
+					</p-table>
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
+</div>

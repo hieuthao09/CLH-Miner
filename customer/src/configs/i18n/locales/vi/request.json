@@ -1,0 +1,8 @@
+{
+	"INVALID_CREDENTIALS": "Thông tin đăng nhập không hợp lệ",
+	"RECORD_NOT_UNIQUE": "Một tài khoản đã tồn tại với email mà bạn cung cấp",
+	"FORBIDDEN": "Bạn không có quyền truy cập vào dữ liệu này",
+	"TOKEN_EXPIRES": "Phiên đăng nhập hết hạn",
+	"ADD_TO_CART_SUCCESS": "Sản phẩm đã được thêm vào giỏ hàng của bạn",
+	"CREATE_ORDER_SUCCESS": "Tạo đơn hàng thành công"
+}
